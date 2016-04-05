@@ -9,7 +9,7 @@ var compiler = webpack(config);
 var app = express();
 
 var isProduction = process.env.NODE_ENV === 'production';
-var port = isProduction ? process.env.PORT : 3000;
+var port = process.env.PORT || 3000;
 var publicPath = path.resolve(__dirname, 'dist/');
 
 
