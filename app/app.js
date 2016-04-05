@@ -1,6 +1,6 @@
 import angular from 'angular';
 
-console.log(angular);
+// console.log(angular);
 
 const testing = 'testing 123';
 
@@ -9,8 +9,13 @@ const testing = 'testing 123';
 //   console.log(newTest)
 // }
 var test = document.getElementById('root');
-console.log(test);  
-console.log('this works');
+console.log(test); 
+
+const title = document.createElement('h2')
+title.textContent = 'Is this thing on?';
+
+test.appendChild(title);
+// console.log('this wordBreakks');
 // console.log('this works again');
 console.log('this works again and again');
 // document.write('hello')
@@ -18,7 +23,7 @@ console.log('this works again and again');
 
 const tryagain = 'is my ES6 working?'
 
-console.info(tryagain)
+// console.info(tryagain)
 
 if (module.hot) {
   // module.hot.dispose(function() {

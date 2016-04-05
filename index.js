@@ -15,25 +15,42 @@ var publicPath = path.resolve(__dirname, 'dist/');
 
 app.use(express.static(publicPath));
 
-app.use(webpackDevMiddleware(compiler, {
-  hot: true,
-  filename: 'bundle.js',
-  publicPath: '/dist',
-  stats: {
-    colors: true,
-  },
-  historyApiFallback: true,
-}));
+if (!isProduction) {
+  app.use(webpackDevMiddleware(compiler, {
+    hot: true,
+    filename: 'bundle.js',
+    publicPath: '/dist',
+    stats: {
+      colors: true,
+    },
+    historyApiFallback: true,
+  }));
+   
+  app.use(webpackHotMiddleware(compiler, {
+    log: console.log,
+    path: '/__webpack_hmr',
+    heartbeat: 10 * 1000,
+  }));
+}
+// app.use(webpackDevMiddleware(compiler, {
+//   hot: true,
+//   filename: 'bundle.js',
+//   publicPath: '/dist',
+//   stats: {
+//     colors: true,
+//   },
+//   historyApiFallback: true,
+// }));
  
-app.use(webpackHotMiddleware(compiler, {
-  log: console.log,
-  path: '/__webpack_hmr',
-  heartbeat: 10 * 1000,
-}));
+// app.use(webpackHotMiddleware(compiler, {
+//   log: console.log,
+//   path: '/__webpack_hmr',
+//   heartbeat: 10 * 1000,
+// }));
 
-// app.get('/', function (req, res) {
-//   res.sendFile(publicPath + '/index.html');
-// });
+app.get('/', function (req, res) {
+  res.sendFile(publicPath + '/index.html');
+});
 
 // app.get('/home', function (req, res) {
 //   res.sendFile(__dirname + '/dist/index.html');
