@@ -1,10 +1,5 @@
 var express = require('express');
 var path = require('path');
-var webpack = require('webpack');
-var webpackDevMiddleware = require('webpack-dev-middleware');
-var webpackHotMiddleware = require('webpack-hot-middleware');
-var config = require('./webpack.config');
-var compiler = webpack(config);
 
 var app = express();
 
@@ -16,6 +11,12 @@ var publicPath = path.resolve(__dirname, 'dist/');
 app.use(express.static(publicPath));
 
 if (!isProduction) {
+  var webpack = require('webpack');
+  var webpackDevMiddleware = require('webpack-dev-middleware');
+  var webpackHotMiddleware = require('webpack-hot-middleware');
+  var config = require('./webpack.config');
+  var compiler = webpack(config);
+  
   app.use(webpackDevMiddleware(compiler, {
     hot: true,
     filename: 'bundle.js',
