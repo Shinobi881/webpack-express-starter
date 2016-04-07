@@ -12,46 +12,56 @@ app.use(express.static(publicPath));
 
 if (!isProduction) {
   var webpack = require('webpack');
-  var webpackDevMiddleware = require('webpack-dev-middleware');
-  var webpackHotMiddleware = require('webpack-hot-middleware');
+  var WebpackDevServer = require('webpack-dev-server');
   var config = require('./webpack.config');
   var compiler = webpack(config);
   
-  app.use(webpackDevMiddleware(compiler, {
-    hot: true,
-    filename: 'bundle.js',
-    publicPath: '/dist',
-    stats: {
-      colors: true,
-    },
-    historyApiFallback: true,
-  }));
-   
-  app.use(webpackHotMiddleware(compiler, {
-    log: console.log,
-    path: '/__webpack_hmr',
-    heartbeat: 10 * 1000,
-  }));
-}
-// app.use(webpackDevMiddleware(compiler, {
-//   hot: true,
-//   filename: 'bundle.js',
-//   publicPath: '/dist',
-//   stats: {
-//     colors: true,
-//   },
-//   historyApiFallback: true,
-// }));
- 
-// app.use(webpackHotMiddleware(compiler, {
-//   log: console.log,
-//   path: '/__webpack_hmr',
-//   heartbeat: 10 * 1000,
-// }));
+  // var server = new WebpackDevServer(compiler, {    
+  //   contentBase: 'dist',
+  //   hot: true,
+  //   historyApiFallback: false,
+  //   filename: 'bundle.js',
+  //   stats: {
+  //     colors: true,
+  //   },
+  //   publicpath: 'http://localhost:3000/dist/',
+  //   proxy: {
+  //     "*": "http://localhost:3000"
+  //   }
+  // });
 
-app.get('/', function (req, res) {
-  res.sendFile(publicPath + '/index.html');
-});
+  // server.listen(3000, "localhost", function() {});
+
+
+    var server = new WebpackDevServer(webpack(config), {
+      // contentBase: 'dist/',
+      hot: true,
+      filename: 'bundle.js',
+      publicPath: '/dist',
+      stats: {
+        colors: true,
+      },
+      historyApiFallback: true,
+      proxy: {
+        '*': 'http://localhost:3000',
+      },
+    })
+
+    server.listen(3001, 'localhost', function (err, result) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('Listening at localhost:3001');
+      }
+
+    });
+} else {
+  app.get('/', function (req, res) {
+    res.sendFile(publicPath + '/index.html');
+  });
+}
+
+
 
 // app.get('/home', function (req, res) {
 //   res.sendFile(__dirname + '/dist/index.html');

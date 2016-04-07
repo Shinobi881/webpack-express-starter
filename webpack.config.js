@@ -4,7 +4,8 @@ var path = require('path');
 module.exports = {
   context: __dirname,
   entry: [
-    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+    'webpack-hot-middleware/client?http://localhost:3001/',
+    'webpack/hot/dev-server',
     './app/app.js'
   ],
   output: {
@@ -12,6 +13,7 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/dist/'
   },
+  devtool: 'sourcemap',
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
