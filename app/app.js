@@ -8,13 +8,13 @@ const testing = 'testing 123';
 //   let newTest = '2'
 //   console.log(newTest)
 // }
-var test = document.getElementById('root');
-console.log(test); 
+var rootContainer = document.getElementById('root');
+// console.log(rootContainer); 
 
 const title = document.createElement('h2')
 title.textContent = 'Is this thing on?';
 
-test.appendChild(title);
+rootContainer.appendChild(title);
 // console.log('this wordBreakks');
 // console.log('this works again');
 console.log('this works again and again');
@@ -26,8 +26,11 @@ const tryagain = 'is my ES6 working?'
 // console.info(tryagain)
 
 if (module.hot) {
-  // module.hot.dispose(function() {
-  //   sideEffectNode.parentNode.removeChild(sideEffectNode);
-  // });
   module.hot.accept();
+  
+    module.hot.dispose(function() {
+      while (rootContainer.lastChild) {
+        rootContainer.removeChild(rootContainer.lastChild)
+      } 
+    });      
 }

@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "7157f0c8e1dd832f10b5"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "84498c781b8955fa7dbe"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -976,15 +976,15 @@
 	//   let newTest = '2'
 	//   console.log(newTest)
 	// }
-	var test = document.getElementById('root');
-	console.log(test);
+	var rootContainer = document.getElementById('root');
+	console.log(rootContainer);
 
 	var title = document.createElement('h2');
 	title.textContent = 'Is this thing on?';
 
-	test.appendChild(title);
-	// console.log('this wordBreakks');
-	// console.log('this works again');
+	rootContainer.appendChild(title);
+	console.log('this wordBreakks');
+	console.log('this works again');
 	console.log('this works again and again');
 	// document.write('hello')
 	// document.write('testing 123')
@@ -994,10 +994,13 @@
 	// console.info(tryagain)
 
 	if (true) {
-	  // module.hot.dispose(function() {
-	  //   sideEffectNode.parentNode.removeChild(sideEffectNode);
-	  // });
 	  module.hot.accept();
+
+	  module.hot.dispose(function () {
+	    while (rootContainer.lastChild) {
+	      rootContainer.removeChild(rootContainer.lastChild);
+	    }
+	  });
 	}
 
 /***/ },
