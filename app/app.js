@@ -1,5 +1,5 @@
 import angular from 'angular';
-
+import './app2.js';
 // console.log(angular);
 
 const testing = 'testing 123';
@@ -9,7 +9,7 @@ const testing = 'testing 123';
 //   console.log(newTest)
 // }
 var rootContainer = document.getElementById('root');
-// console.log(rootContainer); 
+console.log(rootContainer); 
 
 const title = document.createElement('h2')
 title.textContent = 'Is this thing on?';
