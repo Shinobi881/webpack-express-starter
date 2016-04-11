@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "abd233e4623fd316c50b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "b848b6956aeb1d2df9be"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -1017,13 +1017,6 @@
 	var title = document.createElement('h2');
 	title.textContent = 'Is this thing on?';
 	myBody.appendChild(title);
-
-	// console.log(module.hot)
-	// if (module.hot) {
-	//   module.hot.dispose(function() {
-	//     title.parentNode.removeChild(title);
-	//   });
-	// }
 
 /***/ },
 /* 6 */
